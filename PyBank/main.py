@@ -36,17 +36,15 @@ with open(pybank_csv, newline='') as csvfile:
     for i in profitloss:
         PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
 
-            #IT WILL ONLY LET ME DO ONE OR THE OTHER
     maxPLchange = max(PLchange)
-    print(f'Max is {maxPLchange}')
+    print(f'The maximum increase in profits is {maxPLchange}')
 
     
     for i in profitloss:
         PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
 
     minPLchange = min(PLchange)
-    print(f'Min is {minPLchange}')
-
+    print(f'The maximum decrease in profits is {minPLchange}')
 
 print(f'The total number of months is {totalmonths}')
 print(f'The net profit and loss is {netPL}')
