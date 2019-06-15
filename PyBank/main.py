@@ -1,6 +1,8 @@
 
 #In this challenge, you are tasked with creating a Python script for analyzing the financial records 
-#of your company. You will give a set of financial data called budget_data.csv. The dataset is composed of two columns: Date and Profit/Losses. (Thankfully, your company has rather lax standards for accounting so the records are simple.)
+#of your company. You will give a set of financial data called budget_data.csv. The dataset is composed of 
+#two columns: Date and Profit/Losses. (Thankfully, your company has rather lax standards for accounting so 
+#the records are simple.)
 
 #Your task is to create a Python script that analyzes the records to calculate each of the following:
     #The total number of months included in the dataset
@@ -29,9 +31,24 @@ with open(pybank_csv, newline='') as csvfile:
         months.append(str(row[0]))
         profitloss.append(int(row[1]))
         totalmonths = len(months)
+
         netPL = sum(profitloss)
-        average = netPL / len(profitloss)
-        #################
+
+        #average = netPL / len(profitloss)
+#
+    #SIMON: PLCHANGE PRINTS AS A WEIRD GENERATOR THING, WHICH EXPLAINS WHY IT'S MAD
+    #ABOUT AVERAGE; BUT IT WORKS FINE WITH MAX/MIN; WHY??
+    for i in profitloss:
+        PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
+    
+    print(PLchange)
+        #diff = PLchange
+        #totalchanges = totalchanges + diff
+    
+    #print(avgPLchange)
+    
+    #averagePLchange = mean(PLchange)
+    #print(averagePLchange)
 
     for i in profitloss:
         PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
@@ -49,3 +66,18 @@ with open(pybank_csv, newline='') as csvfile:
 print(f'The total number of months is {totalmonths}')
 print(f'The net profit and loss is {netPL}')
 print(f'The average profit/loss is {average}')
+
+TotalMonths = [totalmonths]
+NetProfitLoss = [netPL]
+AverageProfitLoss = [average]
+Maximum = [maxPLchange]
+Minimum = [minPLchange]
+
+summary = zip(TotalMonths, NetProfitLoss, AverageProfitLoss, Maximum, Minimum)
+
+output_file = os.path.join("Resources", "PyBankFinal.csv")
+
+with open(output_file, "w", newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(["Total Months", "Net Profit/Loss", "Average Profit/Loss", "Greatest Profit Increase", "Greatest Profit Decrease"])
+    writer.writerows(summary)
