@@ -40,7 +40,5 @@ with open(pypoll_csv, newline='') as csvfile:
         unique_list = []
         list_set = set(list1)
         unique_list = (list(list_set))
-        for x in unique_list:
-            print x
     list1 = candidate
-    print(f'The candidates are {list1}')
+    print(f'The candidates are {unique(list1)}')

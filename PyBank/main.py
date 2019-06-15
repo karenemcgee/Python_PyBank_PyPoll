@@ -26,25 +26,28 @@ with open(pybank_csv, newline='') as csvfile:
     next(csvreader, None)
 
     for row in csvreader:
-        #months, net, average
-        #months.append(str(row[0]))
+        months.append(str(row[0]))
         profitloss.append(int(row[1]))
-        #totalmonths = len(months)
-        #netPL = sum(profitloss)
-        #average = netPL / len(profitloss)
+        totalmonths = len(months)
+        netPL = sum(profitloss)
+        average = netPL / len(profitloss)
         #################
 
-        for i in profitloss:
-            PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss) - 1))
+    for i in profitloss:
+        PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
 
             #IT WILL ONLY LET ME DO ONE OR THE OTHER
-            maxPLchange = max(PLchange)
-            print(f'Max is {maxPLchange}')
+    maxPLchange = max(PLchange)
+    print(f'Max is {maxPLchange}')
 
-            minPLchange = min(PLchange)
-            print(f'Min is {minPLchange}')
+    
+    for i in profitloss:
+        PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
+
+    minPLchange = min(PLchange)
+    print(f'Min is {minPLchange}')
 
 
-#print(f'The total number of months is {totalmonths}')
-#print(f'The net profit and loss is {netPL}')
-#print(f'The average profit/loss is {average}')
+print(f'The total number of months is {totalmonths}')
+print(f'The net profit and loss is {netPL}')
+print(f'The average profit/loss is {average}')
