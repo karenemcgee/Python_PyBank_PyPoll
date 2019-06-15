@@ -10,7 +10,7 @@
     #The greatest decrease in losses (date and amount) over the entire period
 
 #In addition, your final script should both print the analysis to the terminal and export a text file 
-#with the results.
+#with the results (aka export csv)
 
 import os
 import csv
