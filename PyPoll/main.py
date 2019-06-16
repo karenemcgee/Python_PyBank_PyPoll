@@ -11,54 +11,46 @@
     #The total number of votes each candidate won
     #The winner of the election based on popular vote.
 
-
-import os
-import csv
 import pandas as pd
+import csv
+import os
+
+pypoll_csv = "Resources/PyPollSmall.csv"
+data_file_pd = pd.read_csv(pypoll_csv)
+
+candidatesList = data_file_pd["Candidate"].value_counts().keys().tolist()
+candidatesVotes = data_file_pd["Candidate"].value_counts().tolist()
+totalVotes = sum(candidatesVotes)
+candidatesPercent = [x / totalVotes for x in candidatesVotes]
+candidatesPercent2 = [x * 100 for x in candidatesPercent]
+maxVotesAmt = max(candidatesVotes)
+
+talliesDF = pd.DataFrame({"Candidates": candidatesList, 
+                          "Votes": candidatesVotes,
+                          "Percent": candidatesPercent2})
+
+winner = talliesDF.iloc[talliesDF.Votes.argmax(), 0]
+
+print(f'ELECTION RESULTS')
+print(f'-------------------------')
+print(f'Total Votes: {totalVotes}')
+print(f'-------------------------')
+print(talliesDF)
+print(f'-------------------------')
+print(f'Winner: {winner}')
+print(f'-------------------------')
 
 mydir = os.getcwd()
-pypoll_csv = os.path.join("Resources", "PyPollSmall.csv")
+output_path = os.path.join("PyPoll", "PyPollResults.txt")
+with open(output_path, 'w', newline='') as csvfile:
+    csvwriter = csv.writer(csvfile, delimiter=',')
+    csvwriter.writerow([f'ELECTION RESULTS'])
+    csvwriter.writerow([f'-------------------------'])
+    csvwriter.writerow([f'Total Votes: {totalVotes}'])
+    csvwriter.writerow([f'-------------------------'])
+    csvwriter.writerow([talliesDF])
+    csvwriter.writerow([f'-------------------------'])
+    csvwriter.writerow([f'Winner: {winner}'])
+    csvwriter.writerow([f'-------------------------'])
 
-with open(pypoll_csv, newline='') as csvfile:
-    csvreader = csv.reader(csvfile, delimiter = ",")
-    next(csvreader, None)
-
-    voterID = []
-    county = []
-    candidate = []
-
-    #THIS PART WORKS
-    for row in csvreader:
-        voterID.append(int(row[0]))
-        county.append(str(row[1]))
-        candidate.append(str(row[2]))
-
-        #TOTAL VOTES
-        for i in voterID:
-            totalvotes = len(voterID)
-
-        #LIST OF CANDIDATES
-        candidatelist = set(candidate)
-
-        #VOTE TOTALS
-        liVotes = candidate.count('Li')
-        khanVotes = candidate.count('Khan')
-        correyVotes = candidate.count('Correy')
-        
-        #VOTE PERCENTAGES
-        liVotePercent = round(((liVotes / totalvotes) * 100),2)
-        khanVotePercent = round(((khanVotes / totalvotes) * 100),2)
-        correyVotePercent = round(((correyVotes / totalvotes) * 100),2)
-
-        #WINNER
-        voteTotals = [liVotes, khanVotes, correyVotes]
-        winner = max(voteTotals)
-    
-    print(f'The total number of votes is {totalvotes}.')
-    print(f'These are the candidates: {candidatelist}')
-    print(f"Li's total number of votes is {liVotes} or {liVotePercent}%.")
-    print(f"Khan's total number of votes is {khanVotes} or {khanVotePercent}%.")
-    print(f"Correy's total number of votes is {correyVotes} or {correyVotePercent}%")
-    print(f'The winner is {winner}!')
-    ########################################################
-    
+talliesDF.to_csv("PyPollCSV.csv", index=False)

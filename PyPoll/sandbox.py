@@ -14,29 +14,16 @@
 import pandas as pd
 import os
 
-#OPEN CSV
 pypoll_csv = "Resources/PyPollSmall.csv"
 data_file_pd = pd.read_csv(pypoll_csv)
 
-
-
-#TOTAL NUMBER OF VOTES CAST
-#totalvotes = data_file_pd.shape[0]
-#print(f'Total Votes: {totalvotes}')
-#print(f'-------------------------')
-
-#LIST OF CANDIDATES AND VOTE TOTALS
 candidatesList = data_file_pd["Candidate"].value_counts().keys().tolist()
 candidatesVotes = data_file_pd["Candidate"].value_counts().tolist()
 totalVotes = sum(candidatesVotes)
 candidatesPercent = [x / totalVotes for x in candidatesVotes]
 candidatesPercent2 = [x * 100 for x in candidatesPercent]
 maxVotesAmt = max(candidatesVotes)
-#print(candidatesList)
-#print(candidatesVotes)
-#print(candidatesPercent2)
 
-#NEW TABLE
 talliesDF = pd.DataFrame({"Candidates": candidatesList, 
                           "Votes": candidatesVotes,
                           "Percent": candidatesPercent2})

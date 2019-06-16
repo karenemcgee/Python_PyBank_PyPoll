@@ -1,0 +1,5 @@
+The total number of months is 86.
+The net profit and loss is $38382578.
+The average change in profit/loss is $-2315.12.
+The minimum change in profit/loss is $-2196167.
+The maximum change in profit/loss is $1926159.

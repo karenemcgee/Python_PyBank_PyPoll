@@ -55,9 +55,17 @@ Minimum = [minPLchange]
 
 summary = zip(TotalMonths, NetProfitLoss, AverageProfitLoss, Maximum, Minimum)
 
-output_file = os.path.join("Resources", "PyBankFinal.csv")
-
+output_file = os.path.join("PyBank", "PyBankCSV.csv")
 with open(output_file, "w", newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(["Total Months", "Net Profit/Loss", "Average Profit/Loss", "Greatest Profit Increase", "Greatest Profit Decrease"])
     writer.writerows(summary)
+
+output_file = os.path.join("PyBank", "PyBankResults.txt")
+with open(output_file, "w", newline='') as csvfile:
+    csvwriter = csv.writer(csvfile, delimiter=',')
+    csvwriter.writerow([f'The total number of months is {totalmonths}.'])
+    csvwriter.writerow([f'The net profit and loss is ${netPL}.'])
+    csvwriter.writerow([f'The average change in profit/loss is ${avgPLchange}.'])
+    csvwriter.writerow([f'The minimum change in profit/loss is ${minPLchange}.'])
+    csvwriter.writerow([f'The maximum change in profit/loss is ${maxPLchange}.'])
