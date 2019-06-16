@@ -13,69 +13,41 @@
 
 import pandas as pd
 import os
-import csv
 
 #OPEN CSV
-mydir = os.getcwd()
-pypoll_csv = os.path.join("Resources", "PyPollSmall.csv")
+pypoll_csv = "Resources/PyPollSmall.csv"
 data_file_pd = pd.read_csv(pypoll_csv)
 
+
+
 #TOTAL NUMBER OF VOTES CAST
-totalvotes = data_file_pd.shape[0]
-print(f'The total number of votes was {totalvotes}.')
+#totalvotes = data_file_pd.shape[0]
+#print(f'Total Votes: {totalvotes}')
+#print(f'-------------------------')
 
 #LIST OF CANDIDATES AND VOTE TOTALS
-candidatesList = data_file_pd["Candidate"].value_counts()
-print(f'The following candidates received these votes: ')
-print(f'{candidatesList}')
+candidatesList = data_file_pd["Candidate"].value_counts().keys().tolist()
+candidatesVotes = data_file_pd["Candidate"].value_counts().tolist()
+totalVotes = sum(candidatesVotes)
+candidatesPercent = [x / totalVotes for x in candidatesVotes]
+candidatesPercent2 = [x * 100 for x in candidatesPercent]
+maxVotesAmt = max(candidatesVotes)
+#print(candidatesList)
+#print(candidatesVotes)
+#print(candidatesPercent2)
 
-# mydir = os.getcwd()
-# pypoll_csv = os.path.join("Resources", "PyPollSmall.csv")
+#NEW TABLE
+talliesDF = pd.DataFrame({"Candidates": candidatesList, 
+                          "Votes": candidatesVotes,
+                          "Percent": candidatesPercent2})
 
-# with open(pypoll_csv, newline='') as csvfile:
-#     csvreader = csv.reader(csvfile, delimiter = ",")
-#     next(csvreader, None)
+winner = talliesDF.iloc[talliesDF.Votes.argmax(), 0]
 
-#     voterID = []
-#     county = []
-#     candidates = []
-
-#     #THIS PART WORKS
-#     for row in csvreader:
-#         voterID.append(int(row[0]))
-#         county.append(str(row[1]))
-#         candidates.append(str(row[2]))
-
-#         #TOTAL VOTES
-#         for i in voterID:
-#             totalvotes = len(voterID)
-
-#         #LIST OF CANDIDATES
-#         candidateUnique = set(candidates)
-#         candidateList = list(candidateUnique)
-
-#     for candidate in candidateList:
-#         print(f"{candidate}'s number of votes are {candidate.count(row[2])}")
-
-#         #VOTE TOTALS
-#         #liVotes = candidate.count('Li')
-#         #khanVotes = candidate.count('Khan')
-#         #correyVotes = candidate.count('Correy')
-        
-#         #VOTE PERCENTAGES
-#         #liVotePercent = round(((liVotes / totalvotes) * 100),2)
-#         #khanVotePercent = round(((khanVotes / totalvotes) * 100),2)
-#         #correyVotePercent = round(((correyVotes / totalvotes) * 100),2)
-
-#         #WINNER
-#         #voteTotals = [liVotes, khanVotes, correyVotes]
-#         #winner = max(voteTotals)
-    
-#     print(f'The total number of votes is {totalvotes}.')
-#     print(f'These are the candidates: {candidateList}')
-#     #print(f"Li's total number of votes is {liVotes} or {liVotePercent}%.")
-#     #print(f"Khan's total number of votes is {khanVotes} or {khanVotePercent}%.")
-#     #print(f"Correy's total number of votes is {correyVotes} or {correyVotePercent}%")
-#     #print(f'The winner is {winner}!')
-#     ########################################################
-    
+print(f'ELECTION RESULTS')
+print(f'-------------------------')
+print(f'Total Votes: {totalVotes}')
+print(f'-------------------------')
+print(talliesDF)
+print(f'-------------------------')
+print(f'Winner: {winner}')
+print(f'-------------------------')
