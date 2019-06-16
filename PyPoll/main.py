@@ -27,27 +27,28 @@ with open(pypoll_csv, newline='') as csvfile:
     county = []
     candidate = []
 
-    #Total number of votes - THIS PART WORKS
-    #for row in csvreader:
-    #    voterID.append(int(row[0]))
-    #    county.append(str(row[1]))
-    #    candidate.append(str(row[2]))
+    #THIS PART WORKS
+    for row in csvreader:
+        voterID.append(int(row[0]))
+        county.append(str(row[1]))
+        candidate.append(str(row[2]))
 
-    #    for i in voterID:
-    #        totalvotes = len(voterID)
-    #print(f'The total number of votes is {totalvotes}.')
-    ########################################################
+        #TOTAL VOTES
+        for i in voterID:
+            totalvotes = len(voterID)
 
-    #Candidates who received votes - THIS WORKS
-    #for row in csvreader:
-    #    voterID.append(int(row[0]))
-    #    county.append(str(row[1]))
-    #    candidate.append(str(row[2]))
-
-    #    candidatelist = set(candidate)
+        #LIST OF CANDIDATES
+        candidatelist = set(candidate)
+        
+        #VOTE PERCENTAGES
+        liVotePercent = ((candidate.count('Li')) / totalvotes) * 100
+        khanVotePercent = ((candidate.count('Khan')) / totalvotes) * 100
+        correyVotePercent = ((candidate.count('Correy')) / totalvotes) * 100
     
-    #print(f'These are the candidates: {candidatelist}')
+    print(f'The total number of votes is {totalvotes}.')
+    print(f'These are the candidates: {candidatelist}')
+    print(f"Li's votes are {liVotePercent}")
+    print(f"Khan's votes are {khanVotePercent}")
+    print(f"Correy's votes are {correyVotePercent}")
     ########################################################
-
     
-
