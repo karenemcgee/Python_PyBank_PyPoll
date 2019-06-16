@@ -50,13 +50,14 @@ with open(pybank_csv, newline='') as csvfile:
     #averagePLchange = mean(PLchange)
     #print(averagePLchange)
 
+    #MAX WORKS
     for i in profitloss:
         PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
 
     maxPLchange = max(PLchange)
     print(f'The maximum increase in profits is {maxPLchange}')
 
-    
+    #MIN WORKS
     for i in profitloss:
         PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
 

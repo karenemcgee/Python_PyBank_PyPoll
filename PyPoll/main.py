@@ -27,7 +27,7 @@ with open(pypoll_csv, newline='') as csvfile:
     next(csvreader, None)
 
     #THIS PART WORKS
-    #for row in csvreader:
+    for row in csvreader:
         voterID.append(int(row[0]))
         county.append(str(row[1]))
         candidate.append(str(row[2]))
