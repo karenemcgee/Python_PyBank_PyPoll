@@ -14,10 +14,7 @@
 
 import os
 import csv
-
-voterID = []
-county = []
-candidate = []
+import pandas as pd
 
 mydir = os.getcwd()
 pypoll_csv = os.path.join("Resources", "PyPollSmall.csv")
@@ -26,19 +23,31 @@ with open(pypoll_csv, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     next(csvreader, None)
 
-    #THIS PART WORKS
-    for row in csvreader:
-        voterID.append(int(row[0]))
-        county.append(str(row[1]))
-        candidate.append(str(row[2]))
+    voterID = []
+    county = []
+    candidate = []
 
-        for i in voterID:
-            totalvotes = len(voterID)
-    print(f'The total number of votes is {totalvotes}.')
+    #Total number of votes - THIS PART WORKS
+    #for row in csvreader:
+    #    voterID.append(int(row[0]))
+    #    county.append(str(row[1]))
+    #    candidate.append(str(row[2]))
 
-    def unique(list1):
-        unique_list = []
-        list_set = set(list1)
-        unique_list = (list(list_set))
-    list1 = candidate
-    print(f'The candidates are {unique(list1)}')
+    #    for i in voterID:
+    #        totalvotes = len(voterID)
+    #print(f'The total number of votes is {totalvotes}.')
+    ########################################################
+
+    #Candidates who received votes - THIS WORKS
+    #for row in csvreader:
+    #    voterID.append(int(row[0]))
+    #    county.append(str(row[1]))
+    #    candidate.append(str(row[2]))
+
+    #    candidatelist = set(candidate)
+    
+    #print(f'These are the candidates: {candidatelist}')
+    ########################################################
+
+    
+
