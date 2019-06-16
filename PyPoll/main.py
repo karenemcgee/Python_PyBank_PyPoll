@@ -39,16 +39,26 @@ with open(pypoll_csv, newline='') as csvfile:
 
         #LIST OF CANDIDATES
         candidatelist = set(candidate)
+
+        #VOTE TOTALS
+        liVotes = candidate.count('Li')
+        khanVotes = candidate.count('Khan')
+        correyVotes = candidate.count('Correy')
         
         #VOTE PERCENTAGES
-        liVotePercent = ((candidate.count('Li')) / totalvotes) * 100
-        khanVotePercent = ((candidate.count('Khan')) / totalvotes) * 100
-        correyVotePercent = ((candidate.count('Correy')) / totalvotes) * 100
+        liVotePercent = round(((liVotes / totalvotes) * 100),2)
+        khanVotePercent = round(((khanVotes / totalvotes) * 100),2)
+        correyVotePercent = round(((correyVotes / totalvotes) * 100),2)
+
+        #WINNER
+        voteTotals = [liVotes, khanVotes, correyVotes]
+        winner = max(voteTotals)
     
     print(f'The total number of votes is {totalvotes}.')
     print(f'These are the candidates: {candidatelist}')
-    print(f"Li's votes are {liVotePercent}")
-    print(f"Khan's votes are {khanVotePercent}")
-    print(f"Correy's votes are {correyVotePercent}")
+    print(f"Li's total number of votes is {liVotes} or {liVotePercent}%.")
+    print(f"Khan's total number of votes is {khanVotes} or {khanVotePercent}%.")
+    print(f"Correy's total number of votes is {correyVotes} or {correyVotePercent}%")
+    print(f'The winner is {winner}!')
     ########################################################
     
