@@ -17,9 +17,6 @@
 import os
 import csv
 
-months = []
-profitloss = []
-
 mydir = os.getcwd()
 pybank_csv = os.path.join("Resources", "PyBank.csv")
 
@@ -27,50 +24,32 @@ with open(pybank_csv, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     next(csvreader, None)
 
+    months = []
+    profitloss = []
+    PLchange = []
+
     for row in csvreader:
         months.append(str(row[0]))
         profitloss.append(int(row[1]))
+        
         totalmonths = len(months)
-
         netPL = sum(profitloss)
-
-        #average = netPL / len(profitloss)
-#
-    #SIMON: PLCHANGE PRINTS AS A WEIRD GENERATOR THING, WHICH EXPLAINS WHY IT'S MAD
-    #ABOUT AVERAGE; BUT IT WORKS FINE WITH MAX/MIN; WHY??
-    for i in profitloss:
-        PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
     
-    print(PLchange)
-        #diff = PLchange
-        #totalchanges = totalchanges + diff
+    for i in range(1, len(profitloss)):
+        PLchange.append(profitloss[i] - profitloss[i-1])
+        avgPLchange = round((sum(PLchange)/len(PLchange)),2)
+        minPLchange = min(PLchange)
+        maxPLchange = max(PLchange)
     
-    #print(avgPLchange)
-    
-    #averagePLchange = mean(PLchange)
-    #print(averagePLchange)
-
-    #MAX WORKS
-    for i in profitloss:
-        PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
-
-    maxPLchange = max(PLchange)
-    print(f'The maximum increase in profits is {maxPLchange}')
-
-    #MIN WORKS
-    for i in profitloss:
-        PLchange = (profitloss[i+1] - profitloss[i] for i in range(len(profitloss)-1))
-
-    minPLchange = min(PLchange)
-    print(f'The maximum decrease in profits is {minPLchange}')
-
-print(f'The total number of months is {totalmonths}')
-print(f'The net profit and loss is {netPL}')
-print(f'The average profit/loss is {average}')
+    print(f'The total number of months is {totalmonths}.')
+    print(f'The net profit and loss is ${netPL}.')
+    print(f'The average change in profit/loss is ${avgPLchange}.')
+    print(f'The minimum change in profit/loss is ${minPLchange}.')
+    print(f'The maximum change in profit/loss is ${maxPLchange}.')
 
 TotalMonths = [totalmonths]
 NetProfitLoss = [netPL]
-AverageProfitLoss = [average]
+AverageProfitLoss = [avgPLchange]
 Maximum = [maxPLchange]
 Minimum = [minPLchange]
 
