@@ -53,4 +53,4 @@ with open(output_path, 'w', newline='') as csvfile:
     csvwriter.writerow([f'Winner: {winner}'])
     csvwriter.writerow([f'-------------------------'])
 
-talliesDF.to_csv("PyPollCSV.csv", index=False)
+talliesDF.to_csv('../python-challenge/PyPoll/PyPollCSV.csv', index=False)
