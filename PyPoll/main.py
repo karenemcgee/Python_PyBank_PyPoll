@@ -15,7 +15,7 @@ import pandas as pd
 import csv
 import os
 
-pypoll_csv = "Resources/PyPollSmall.csv"
+pypoll_csv = "Resources/PyPoll.csv"
 data_file_pd = pd.read_csv(pypoll_csv)
 
 candidatesList = data_file_pd["Candidate"].value_counts().keys().tolist()
