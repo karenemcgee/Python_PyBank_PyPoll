@@ -39,13 +39,19 @@ with open(pybank_csv, newline='') as csvfile:
         PLchange.append(profitloss[i] - profitloss[i-1])
         avgPLchange = round((sum(PLchange)/len(PLchange)),2)
         minPLchange = min(PLchange)
+        minPLchangeMonth = months[i]
         maxPLchange = max(PLchange)
+        maxPLchangeMonth = months[i]
+    #CANT FIGURE OUT HOW TO MAKE MONTHS WORK HERE...
     
-    print(f'The total number of months is {totalmonths}.')
-    print(f'The net profit and loss is ${netPL}.')
-    print(f'The average change in profit/loss is ${avgPLchange}.')
-    print(f'The minimum change in profit/loss is ${minPLchange}.')
-    print(f'The maximum change in profit/loss is ${maxPLchange}.')
+    print(f'Financial Analysis')
+    print(f'----------------------------')
+    print(f'Total Months: {totalmonths}')
+    print(f'Total: ${netPL}')
+    print(f'Average Change: ${avgPLchange}')
+    print(f'Greatest Increase in Profits: {maxPLchangeMonth} ${maxPLchange}')
+    print(f'Greatest Decrease in Profits: {minPLchangeMonth} ${minPLchange}')
+    
 
 TotalMonths = [totalmonths]
 NetProfitLoss = [netPL]
@@ -64,8 +70,10 @@ with open(output_file, "w", newline='') as csvfile:
 output_file = os.path.join("PyBank", "PyBankResults.txt")
 with open(output_file, "w", newline='') as csvfile:
     csvwriter = csv.writer(csvfile, delimiter=',')
-    csvwriter.writerow([f'The total number of months is {totalmonths}.'])
-    csvwriter.writerow([f'The net profit and loss is ${netPL}.'])
-    csvwriter.writerow([f'The average change in profit/loss is ${avgPLchange}.'])
-    csvwriter.writerow([f'The minimum change in profit/loss is ${minPLchange}.'])
-    csvwriter.writerow([f'The maximum change in profit/loss is ${maxPLchange}.'])
+    csvwriter.writerow([f'Financial Analysis'])
+    csvwriter.writerow([f'----------------------------'])
+    csvwriter.writerow([f'Total Months: {totalmonths}'])
+    csvwriter.writerow([f'Total: ${netPL}'])
+    csvwriter.writerow([f'Average Change: ${avgPLchange}'])
+    csvwriter.writerow([f'Greatest Increase in Profits: {maxPLchangeMonth} ${maxPLchange}'])
+    csvwriter.writerow([f'Greatest Decrease in Profits: {minPLchangeMonth} ${minPLchange}'])
